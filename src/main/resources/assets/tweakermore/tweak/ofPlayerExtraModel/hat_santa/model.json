@@ -1,0 +1,63 @@
+{
+	"type" : "PlayerItem",
+	"texture": "optifine:textures/features/hat_santa.png",
+	"textureSize": [64, 32],
+	"models": [
+		{
+			"part": "santa_hat",
+			"id": "santa_hat",
+			"type": "ModelBox",
+			"attachTo": "head", 
+			"invertAxis": "xy",
+			"translate": [0, 0, 0],
+			"rotate": [0, -90, 0],
+			"submodels": [
+				{
+					"id": "sant_hat_top2",
+					"invertAxis": "xy",
+					"translate": [0.53024, 10.61642, 0],
+					"rotate": [0, 0, -60],
+					"boxes": [
+						{"coordinates": [-0.5, 2, -1.5, 3, 3, 3], "textureOffset": [0, 0]}
+					]
+				},
+				{
+					"id": "sant_hat_top1",
+					"invertAxis": "xy",
+					"translate": [1.03024, 9.75039, 0],
+					"rotate": [0, 0, -50],
+					"boxes": [
+						{"coordinates": [-3, -1, -3, 6, 4, 6], "textureOffset": [0, 0]}
+					]
+				},
+				{
+					"id": "santa_hat_top0",
+					"invertAxis": "xy",
+					"translate": [0.2892, 8.72718, 0],
+					"rotate": [0, 0, -20],
+					"boxes": [
+						{"coordinates": [-4, -1, -4, 9, 3, 8], "textureOffset": [0, 0]}
+					]
+				},
+				{
+					"id": "sant_hat_top3",
+					"invertAxis": "xy",
+					"translate": [5.78024, 12.11642, 0],
+					"rotate": [0, 0, 15],
+					"boxes": [
+						{"coordinates": [-0.90192, -1.83013, -2, 4, 4, 4], "textureOffset": [0, 16]}
+					]
+				},
+				{
+					"id": "santa_hat_base",
+					"invertAxis": "xy",
+					"translate": [0.2892, 8.72718, 0],
+					"rotate": [0, 0, -15],
+					"boxes": [
+						{"coordinates": [-4.5, -3, -4.5, 10, 4, 9], "textureOffset": [0, 16], "sizeAdd": 0.1}
+					]
+				}
+			]
+		}
+	]
+}

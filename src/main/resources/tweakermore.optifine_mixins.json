@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.fallenbreath.tweakermore.mixins",
+  "plugin": "me.fallenbreath.tweakermore.util.mixin.TweakerMoreOptifineMixinConfigPlugin",
+  "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
+  "mixins": [
+    "tweaks.mod_tweaks.ofPlayerExtraModelOverride.PlayerConfigurationParserMixin",
+    "tweaks.mod_tweaks.ofPlayerExtraModelOverride.PlayerConfigurationReceiverMixin",
+    "tweaks.mod_tweaks.ofUseVanillaBrightnessCache.LightCacheOFMixin",
+    "tweaks.mod_tweaks.shaderGameTimeAsWorldTime.ShadersMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "${archivesBaseName}-refmap.json"
+}
