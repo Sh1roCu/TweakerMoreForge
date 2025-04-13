@@ -3,4 +3,4 @@
 
 ### This mod requires [MaFgLib](https://modrinth.com/mod/mafglib)
 
-### Can also download in [Modrinth](https://modrinth.com/mod/tweakermoreforge) or [CurseForge](https://legacy.curseforge.com/minecraft/mc-mods/tweakermoreforge)
+### Can also download in [Modrinth](https://modrinth.com/mod/tweakermoreforge) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/tweakermoreforge)
