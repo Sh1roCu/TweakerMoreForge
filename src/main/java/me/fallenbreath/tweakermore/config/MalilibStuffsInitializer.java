@@ -20,17 +20,16 @@
 
 package me.fallenbreath.tweakermore.config;
 
+import cn.sh1rocu.tweakermoreforge.TweakerMoreForge;
 import fi.dy.masa.malilib.config.ConfigManager;
 import fi.dy.masa.malilib.event.InitializationHandler;
 import fi.dy.masa.malilib.event.InputEventHandler;
+import fi.dy.masa.malilib.registry.Registry;
+import fi.dy.masa.malilib.util.data.ModInfo;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
 
-//#if MC >= 12101
-//$$ import fi.dy.masa.malilib.registry.Registry;
-//$$ import fi.dy.masa.malilib.util.data.ModInfo;
-//$$ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
-//#endif
 
 public class MalilibStuffsInitializer {
     public static void init() {
@@ -39,7 +38,7 @@ public class MalilibStuffsInitializer {
             InputEventHandler.getKeybindManager().registerKeybindProvider(new KeybindProvider());
 
             //#if MC >= 12101
-            //$$ Registry.CONFIG_SCREEN.registerConfigScreenFactory(new ModInfo(TweakerMoreMod.MOD_ID, TweakerMoreMod.MOD_NAME, TweakerMoreConfigGui::new));
+            Registry.CONFIG_SCREEN.registerConfigScreenFactory(new ModInfo(TweakerMoreForge.MODID, TweakerMoreForge.MOD_NAME, TweakerMoreConfigGui::new));
             //#endif
 
             TweakerMoreRenderEventHandler.init();
