@@ -58,7 +58,7 @@ public class ContainerFiller implements IContainerProcessor {
                 }
             }
         if (bestSlot != null && !allSlots.isEmpty()) {
-            Component stackName = bestSlot.getItem().getItemName();
+            Component stackName = bestSlot.getItem().getHoverName();
             InventoryUtils.tryMoveStacks(bestSlot, containerScreen, true, true, false);
             long amount = containerInvSlots.stream().filter(Slot::hasItem).count(), total = containerInvSlots.size();
             boolean isFull = AbstractContainerMenu.getRedstoneSignalFromContainer(containerInvSlots.getFirst().container) >= 15;

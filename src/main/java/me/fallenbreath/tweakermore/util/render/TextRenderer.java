@@ -196,7 +196,7 @@ public class TextRenderer {
             //TODO check color4f, see if it can replace blendFunc
 
             //#if MC < 11904
-            RenderGlobals.enableDepthTest();
+            //$$ RenderGlobals.enableDepthTest();
             //#endif
         }
         positionTransformer.restore();
