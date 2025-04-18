@@ -56,7 +56,7 @@ public class McMatrixStack implements IMatrixStack {
 
     @Override
     public void popMatrix() {
-        if (!matrixStack.clear()) matrixStack.popPose();
+        matrixStack.popPose();
     }
 
     @Override
