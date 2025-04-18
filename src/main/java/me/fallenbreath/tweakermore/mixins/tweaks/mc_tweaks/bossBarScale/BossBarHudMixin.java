@@ -64,7 +64,6 @@ public abstract class BossBarHudMixin {
             //$$ , MatrixStack matrixStackOrDrawContext
             //#endif
     ) {
-        this.scaler = null;
         if (TweakerMoreConfigs.BOSS_BAR_SCALE.isModified()) {
             this.scaler = RenderUtils.createScaler(windowsWidth / 2.0, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
             this.scaler.apply(RenderContext.of(
@@ -91,6 +90,8 @@ public abstract class BossBarHudMixin {
     private void tweakerMore_bossBarScale_pop(CallbackInfo ci) {
         if (this.scaler != null) {
             this.scaler.restore();
+            //should be here for (neo)forge
+            this.scaler = null;
         }
     }
 }
