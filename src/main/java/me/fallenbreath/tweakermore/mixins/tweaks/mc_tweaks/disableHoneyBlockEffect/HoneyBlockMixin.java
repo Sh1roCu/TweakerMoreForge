@@ -32,7 +32,7 @@ import net.minecraft.world.level.block.HoneyBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.15,)"))
 @Mixin(HoneyBlock.class)
 public abstract class HoneyBlockMixin {
     @ModifyExpressionValue(

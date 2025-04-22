@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Restriction(require = {
         @Condition(ModIds.litematica),
-        @Condition(value = ModIds.minecraft, versionPredicates = "<1.16")
+        @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.16)")
 })
 @Mixin(WorldUtils.class)
 public abstract class WorldUtilsMixin {

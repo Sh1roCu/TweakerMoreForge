@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.2"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.20.2,)"))
 @Mixin(AbstractDebugChart.class)
 public interface DebugChartAccessor {
     @Accessor("sampleStorage")

@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.17"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.17)"))
 @Mixin(Gui.class)
 public abstract class InGameHudMixin {
 /*    @Shadow

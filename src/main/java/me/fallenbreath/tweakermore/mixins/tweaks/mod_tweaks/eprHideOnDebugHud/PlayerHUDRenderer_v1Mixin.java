@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("UnresolvedMixinReference")
-@Restriction(require = @Condition(value = ModIds.extra_player_renderer, versionPredicates = "<2.0.0"))
+@Restriction(require = @Condition(value = ModIds.extra_player_renderer, versionPredicates = "(, 2.0.0)"))
 @Pseudo
 @Mixin(targets = "github.io.lucunji.explayerenderer.client.render.PlayerHUD")
 public abstract class PlayerHUDRenderer_v1Mixin

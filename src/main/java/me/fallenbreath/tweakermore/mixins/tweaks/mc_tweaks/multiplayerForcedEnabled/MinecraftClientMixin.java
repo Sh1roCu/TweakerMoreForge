@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.16,)"))
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
     @Inject(method = "isMultiplayerServer ", at = @At("HEAD"), cancellable = true)

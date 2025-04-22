@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.Mixin;
 //$$ import java.util.Map;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.21.4"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.21.4)"))
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
     //need MC<1.21.4

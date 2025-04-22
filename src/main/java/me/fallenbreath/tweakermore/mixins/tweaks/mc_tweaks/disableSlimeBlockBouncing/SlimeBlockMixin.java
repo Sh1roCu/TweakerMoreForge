@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
 
-@Restriction(require = @Condition(value = minecraft, versionPredicates = "<1.15"))
+@Restriction(require = @Condition(value = minecraft, versionPredicates = "(, 1.15)"))
 @Mixin(DummyClass.class)
 public abstract class SlimeBlockMixin
 {
