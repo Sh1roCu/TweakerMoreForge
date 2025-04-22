@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class WorldRendererMixin {
     @Inject(
             //#if MC >= 11500
-            method = "renderBlockOutline",
+            method = "renderHitOutline",
             //#else
             //$$ method = "drawHighlightedBlockOutline",
             //#endif
@@ -48,7 +48,7 @@ public abstract class WorldRendererMixin {
 
     @Inject(
             //#if MC >= 11500
-            method = "renderBlockOutline",
+            method = "renderHitOutline",
             //#else
             //$$ method = "drawHighlightedBlockOutline",
             //#endif
