@@ -32,19 +32,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LevelRenderer.class)
 public abstract class WorldRendererMixin {
     @Inject(
-            //#if MC > 12101
-            method = "renderLevel",
-            //#elseif MC >= 11500
-            //$$ method = "renderBlockOutline",
+            //#if MC >= 11500
+            method = "renderHitOutline",
             //#else
             //$$ method = "drawHighlightedBlockOutline",
             //#endif
-            //$$ at = @At("HEAD")
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/LevelRenderer;renderHitOutline(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
-            )
-            //#endif
+            at = @At("HEAD")
     )
     private void movingPistonBlockSelectable_blockOutlineRender_start(CallbackInfo ci, @Share("") LocalBooleanRef hasSet) {
         if (MovingPistonBlockSelectableHelper.shouldEnableFeature()) {
@@ -54,19 +47,12 @@ public abstract class WorldRendererMixin {
     }
 
     @Inject(
-            //#if MC > 12101
-            method = "renderLevel",
-            //#elseif MC >= 11500
+            //#if MC >= 11500
+            method = "renderHitOutline",
             //#else
             //$$ method = "drawHighlightedBlockOutline",
             //#endif
-            //$$ at = @At("TAIL")
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/LevelRenderer;renderHitOutline(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
-                    shift = At.Shift.AFTER
-            )
-            //#endif
+            at = @At("TAIL")
     )
     private void movingPistonBlockSelectable_blockOutlineRender_end(CallbackInfo ci, @Share("") LocalBooleanRef hasSet) {
         if (hasSet.get()) {
