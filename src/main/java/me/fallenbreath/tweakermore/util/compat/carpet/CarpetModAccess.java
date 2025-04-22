@@ -33,6 +33,7 @@ import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforgespi.language.IModInfo;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -48,13 +49,12 @@ public class CarpetModAccess {
         if (!PlatformUtils.isModLoaded(ModIds.carpet))
             return false;
         if (ModList.get() == null) {
-            ArtifactVersion version = LoadingModList.get().getModFileById(ModIds.carpet).getFile().getJarVersion();
-            return PlatformUtils.doesVersionSatisfyPredicate(version, predicate);
+            return PlatformUtils.doesModFitsAnyPredicate(ModIds.carpet, Collections.singleton(predicate));
         }
         return ModList.get().getModContainerById(ModIds.carpet).
                 map(ModContainer::getModInfo).
                 map(IModInfo::getVersion).
-                map(version -> PlatformUtils.doesVersionSatisfyPredicate(version, predicate)).
+                map(version -> PlatformUtils.doesModFitsAnyPredicate(ModIds.carpet, Collections.singleton(predicate))).
                 orElse(false);
     }
 

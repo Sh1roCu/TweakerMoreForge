@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.15,)"))
 @Mixin(
         //#if MC >= 12104
         //$$ ItemStackRenderState.LayerRenderState.class

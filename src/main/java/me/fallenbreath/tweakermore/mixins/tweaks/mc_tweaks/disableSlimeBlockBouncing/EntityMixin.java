@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
 
-@Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.15"))
+@Restriction(require = @Condition(value = minecraft, versionPredicates = "[1.15,)"))
 @Mixin(Entity.class)
 public abstract class EntityMixin {
     @Inject(method = "isSuppressingBounce", at = @At("HEAD"), cancellable = true)

@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Consumer;
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.16,)"))
 @Mixin(KeyboardHandler.class)
 public abstract class KeyboardMixin {
     @Shadow

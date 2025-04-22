@@ -40,7 +40,7 @@ import java.util.UUID;
 //$$ import net.minecraft.client.util.SkinTextures;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.3"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.19.3,)"))
 @Mixin(DefaultPlayerSkin.class)
 public abstract class DefaultSkinHelperMixin {
     @Shadow

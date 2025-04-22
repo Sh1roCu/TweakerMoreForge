@@ -20,11 +20,30 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.creativePickBlockWithState;
 
+import com.google.common.collect.Maps;
+import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import java.util.Map;
 
 //#if MC >= 12006
 //$$ import com.google.common.collect.Maps;
@@ -33,20 +52,21 @@ import org.spongepowered.asm.mixin.Mixin;
 //$$ import java.util.Map;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.21.4"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.21.4)"))
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
     //need MC<1.21.4
 
-    /*@Inject(
-            method = "pickItem",
+    @Inject(
+            method = "pickBlock",
             at = @At(
                     value = "INVOKE",
-                    target = "isEmpty"
+                    target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z",
+                    ordinal = 0
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void creativePickBlockWithState_storeStateInTag(CallbackInfo ci) {
+    private void creativePickBlockWithState_storeStateInTag(CallbackInfo ci, boolean isCreative, BlockEntity blockentity, HitResult.Type hitResult, ItemStack itemStack, BlockPos blockPos, BlockState blockState, Block block) {
         if (isCreative && !itemStack.isEmpty()) {
             if (TweakerMoreConfigs.CREATIVE_PICK_BLOCK_WITH_STATE.isKeybindHeld()) {
                 Item item = itemStack.getItem();
@@ -57,21 +77,21 @@ public abstract class MinecraftClientMixin {
                 }
 
                 //#if MC >= 12006
-                //$$ Map<String, String> properties = Maps.newLinkedHashMap();
-                //$$ blockState.getEntries().forEach((property, value) -> {
-                //$$ 	properties.put(property.getName(), value.toString());
-                //$$ });
-                //$$ itemStack.set(DataComponentTypes.BLOCK_STATE, new BlockStateComponent(properties));
-                //#else
-                CompoundTag nbt = new CompoundTag();
-                blockState.getEntries().forEach((property, value) -> {
-                    nbt.putString(property.getName(), value.toString());
+                Map<String, String> properties = Maps.newLinkedHashMap();
+                blockState.getValues().forEach((property, value) -> {
+                    properties.put(property.getName(), value.toString());
                 });
-                itemStack.getOrCreateTag().put("BlockStateTag", nbt);
+                itemStack.set(DataComponents.BLOCK_STATE, new BlockItemStateProperties(properties));
+                //#else
+                //$$ CompoundTag nbt = new CompoundTag();
+                //$$ blockState.getValues().forEach((property, value) -> {
+                //$$    nbt.putString(property.getName(), value.toString());
+                //$$ });
+                //$$ itemStack.getOrCreateTag().put("BlockStateTag", nbt);
                 //#endif
 
                 InfoUtils.printActionbarMessage("tweakermore.impl.creativePickBlockWithState.message", block.getName());
             }
         }
-    }*/
+    }
 }

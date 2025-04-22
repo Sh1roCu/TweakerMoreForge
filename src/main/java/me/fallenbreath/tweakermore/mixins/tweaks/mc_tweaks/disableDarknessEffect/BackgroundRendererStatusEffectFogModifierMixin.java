@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
 //$$ import net.minecraft.registry.entry.RegistryEntry;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.19,)"))
 @Mixin(targets = "net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction")
 public interface BackgroundRendererStatusEffectFogModifierMixin {
     @Shadow

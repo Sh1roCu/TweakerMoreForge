@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //$$ import net.minecraft.component.DataComponentTypes;
 //#endif
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.4"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.19.4,)"))
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     @Inject(method = "hasFoil", at = @At("RETURN"), cancellable = true)

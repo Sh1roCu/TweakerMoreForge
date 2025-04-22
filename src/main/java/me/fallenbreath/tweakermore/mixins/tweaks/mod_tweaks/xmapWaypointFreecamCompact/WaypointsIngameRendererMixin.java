@@ -42,8 +42,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
         },
         // No more freecam issue with xaero's mod >= 24.6
         conflict = {
-                @Condition(value = ModIds.xaero_betterpvp, versionPredicates = ">=24.6"),
-                @Condition(value = ModIds.xaero_minimap, versionPredicates = ">=24.6")
+                @Condition(value = ModIds.xaero_betterpvp, versionPredicates = "[24.6,)"),
+                @Condition(value = ModIds.xaero_minimap, versionPredicates = "[24.6,)")
         }
 )
 @Pseudo
