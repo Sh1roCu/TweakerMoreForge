@@ -30,7 +30,7 @@ import net.minecraft.world.level.block.piston.PistonStructureResolver;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0"))
+@Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "(, 1.6.0]"))
 @Mixin(PistonStructureResolver.class)
 public abstract class PistonHandlerPushLimitMixin {
     @ModifyExpressionValue(

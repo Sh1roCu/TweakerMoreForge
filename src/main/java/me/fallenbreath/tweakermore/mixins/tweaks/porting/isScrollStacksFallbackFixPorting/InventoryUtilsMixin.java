@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Restriction(require = {
         @Condition(ModIds.itemscroller),
-        @Condition(value = ModIds.minecraft, versionPredicates = "<1.18")
+        @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.18)")
 })
 @Mixin(InventoryUtils.class)
 public abstract class InventoryUtilsMixin {

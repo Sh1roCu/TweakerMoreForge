@@ -26,7 +26,7 @@ import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.20"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.20)"))
 @Mixin(SignBlockEntity.class)
 public interface SignBlockEntityAccessor {
 /*    @Accessor("text")

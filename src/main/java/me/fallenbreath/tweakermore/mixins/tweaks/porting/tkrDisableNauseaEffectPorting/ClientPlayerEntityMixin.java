@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.17"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.17)"))
 @Mixin(LocalPlayer.class)
 public abstract class ClientPlayerEntityMixin implements ClientPlayerEntityWithRealNauseaStrength {
     @Shadow

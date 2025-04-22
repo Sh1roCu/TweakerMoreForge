@@ -33,7 +33,7 @@ import java.io.File;
 
 @Restriction(require = {
         @Condition(ModIds.litematica),
-        @Condition(value = ModIds.minecraft, versionPredicates = "<1.17")
+        @Condition(value = ModIds.minecraft, versionPredicates = "(, 1.17)")
 })
 @Mixin(DataManager.class)
 public abstract class DataManagerMixin {

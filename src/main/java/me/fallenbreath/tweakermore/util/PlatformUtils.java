@@ -20,12 +20,11 @@
 
 package me.fallenbreath.tweakermore.util;
 
+import me.fallenbreath.conditionalmixin.api.util.VersionChecker;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.fml.loading.moddiscovery.ModInfo;
-import org.apache.maven.artifact.versioning.ArtifactVersion;
-import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.util.Collection;
 
@@ -45,64 +44,71 @@ public class PlatformUtils {
     }
 
     public static boolean doesModFitsAnyPredicate(String modId, Collection<String> versionPredicates) {
-        if (!isModLoaded(modId))
-            return false;
-        if (ModList.get() == null) {
-            ArtifactVersion version = modId.equals(ModIds.minecraft) ? new DefaultArtifactVersion(FMLLoader.versionInfo().mcVersion()) : LoadingModList.get().getModFileById(modId).getFile().getJarVersion();
-            return versionPredicates.isEmpty() || versionPredicates.stream().anyMatch(vp -> doesVersionSatisfyPredicate(version, vp));
+        return VersionChecker.doesModVersionSatisfyPredicate(modId, versionPredicates);
+/*        if (ModList.get() == null) {
+            ArtifactVersion version = modId.equals(ModIds.minecraft) ? new DefaultArtifactVersion(FMLLoader.versionInfo().mcVersion()) :
+                    LoadingModList.get().getMods().stream().filter((modInfo -> modInfo.getModId().equals(modId))).map(ModInfo::getVersion).findFirst().orElse(null);
+            return versionPredicates.isEmpty() || (version != null && versionPredicates.stream().anyMatch(vp -> doesVersionSatisfyPredicate(version, vp)));
         }
         return ModList.get().getModContainerById(modId).
                 map(mod -> {
                     ArtifactVersion version = modId.equals(ModIds.minecraft) ? new DefaultArtifactVersion(FMLLoader.versionInfo().mcVersion()) : mod.getModInfo().getVersion();
-                    return versionPredicates.isEmpty() || versionPredicates.stream().anyMatch(vp -> doesVersionSatisfyPredicate(version, vp));
+                    return versionPredicates.isEmpty() || (version != null && versionPredicates.stream().anyMatch(vp -> doesVersionSatisfyPredicate(version, vp)));
                 }).
-                orElse(false);
+                orElse(false);*/
     }
 
-    public static boolean doesVersionSatisfyPredicate(ArtifactVersion version, String versionPredicate) {
+/*    public static boolean doesVersionSatisfyPredicate(ArtifactVersion version, String versionPredicate) {
         try {
-            if (versionPredicate.contains("=")) {
-                if (versionPredicate.contains("<")) {
-                    String[] target = versionPredicate.split("=")[1].split("\\.");
-                    if (version.getMajorVersion() > Integer.parseInt(target[0]))
-                        return false;
-                    if (version.getMinorVersion() > Integer.parseInt(target[1]))
-                        return false;
-                    return target.length == 2 || version.getIncrementalVersion() <= Integer.parseInt(target[2]);
-                }
-                if (versionPredicate.contains(">")) {
-                    String[] target = versionPredicate.split("=")[1].split("\\.");
-                    if (version.getMajorVersion() < Integer.parseInt(target[0]))
-                        return false;
-                    if (version.getMinorVersion() < Integer.parseInt(target[1]))
-                        return false;
-                    return target.length == 2 || version.getIncrementalVersion() >= Integer.parseInt(target[2]);
-                }
-                // just =
-                String[] target = versionPredicate.replace("=", "").split("\\.");
-                return version.getMajorVersion() == Integer.parseInt(target[0]) && version.getMinorVersion() == Integer.parseInt(target[1])
-                        && (target.length == 2 || version.getIncrementalVersion() == Integer.parseInt(target[2]));
-            }
-            if (versionPredicate.contains("<")) {
-                String[] target = versionPredicate.replace("<", "").split("\\.");
-                if (version.getMajorVersion() > Integer.parseInt(target[0]))
-                    return false;
-                if (version.getMinorVersion() > Integer.parseInt(target[1]))
-                    return false;
-                return target.length == 2 || version.getIncrementalVersion() < Integer.parseInt(target[2]);
-            }
-            if (versionPredicate.contains(">")) {
-                String[] target = versionPredicate.replace(">", "").split("\\.");
-                if (version.getMajorVersion() < Integer.parseInt(target[0]))
-                    return false;
-                if (version.getMinorVersion() < Integer.parseInt(target[1]))
-                    return false;
-                return target.length == 2 || version.getIncrementalVersion() > Integer.parseInt(target[2]);
-            }
+            if (versionPredicate.contains(" "))
+                return versionPredicate(version, versionPredicate.split(" ")[0]) && versionPredicate(version, versionPredicate.split(" ")[1]);
+            else return versionPredicate(version, versionPredicate);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+    }*/
+
+/*    private static boolean versionPredicate(ArtifactVersion version, String versionPredicate) {
+        if (versionPredicate.contains("=")) {
+            if (versionPredicate.contains("<")) {
+                String[] target = versionPredicate.split("=")[1].split("\\.");
+                if (version.getMajorVersion() > Integer.parseInt(target[0]))
+                    return false;
+                if (version.getMinorVersion() > Integer.parseInt(target[1]))
+                    return false;
+                return target.length == 2 || version.getIncrementalVersion() <= Integer.parseInt(target[2]);
+            }
+            if (versionPredicate.contains(">")) {
+                String[] target = versionPredicate.split("=")[1].split("\\.");
+                if (version.getMajorVersion() < Integer.parseInt(target[0]))
+                    return false;
+                if (version.getMinorVersion() < Integer.parseInt(target[1]))
+                    return false;
+                return target.length == 2 || version.getIncrementalVersion() >= Integer.parseInt(target[2]);
+            }
+            // just =
+            String[] target = versionPredicate.replace("=", "").split("\\.");
+            return version.getMajorVersion() == Integer.parseInt(target[0]) && version.getMinorVersion() == Integer.parseInt(target[1])
+                    && (target.length == 2 || version.getIncrementalVersion() == Integer.parseInt(target[2]));
+        }
+
+        if (versionPredicate.contains("<")) {
+            String[] target = versionPredicate.replace("<", "").split("\\.");
+            if (version.getMajorVersion() > Integer.parseInt(target[0]))
+                return false;
+            if (version.getMinorVersion() > Integer.parseInt(target[1]))
+                return false;
+            return target.length == 2 || version.getIncrementalVersion() < Integer.parseInt(target[2]);
+        }
+        if (versionPredicate.contains(">")) {
+            String[] target = versionPredicate.replace(">", "").split("\\.");
+            if (version.getMajorVersion() < Integer.parseInt(target[0]))
+                return false;
+            if (version.getMinorVersion() < Integer.parseInt(target[1]))
+                return false;
+            return target.length == 2 || version.getIncrementalVersion() > Integer.parseInt(target[2]);
+        }
         return true;
-    }
+    }*/
 }

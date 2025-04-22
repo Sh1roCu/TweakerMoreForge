@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
 
-@Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0"))
+@Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "(, 1.6.0]"))
 @Mixin(
         //#if MC >= 11600
         BlockBehaviour.BlockStateBase.class

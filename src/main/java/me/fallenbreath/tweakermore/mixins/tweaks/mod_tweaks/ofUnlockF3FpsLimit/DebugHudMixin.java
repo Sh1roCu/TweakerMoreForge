@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("target")
-@Restriction(require = {@Condition(ModIds.optifine), @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")})
+@Restriction(require = {@Condition(ModIds.optifine), @Condition(value = ModIds.minecraft, versionPredicates = "[1.15,)")})
 @Mixin(DebugScreenOverlay.class)
 public abstract class DebugHudMixin {
     @Dynamic("Added by optifine")

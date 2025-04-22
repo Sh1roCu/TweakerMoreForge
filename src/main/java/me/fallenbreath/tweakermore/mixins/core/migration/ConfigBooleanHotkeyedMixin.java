@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * which breaks compatibility of config files generated in previous mc versions
  * here comes a hacky fix, still for tweakermore's config only xd
  */
-@Restriction(require = {@Condition(value = ModIds.malilib, versionPredicates = ">=0.11.5")})
+@Restriction(require = {@Condition(value = ModIds.malilib, versionPredicates = "[0.1.14,)")})
 @Mixin(ConfigBooleanHotkeyed.class)
 public abstract class ConfigBooleanHotkeyedMixin extends ConfigBoolean {
     public ConfigBooleanHotkeyedMixin(String name, boolean defaultValue, String comment) {

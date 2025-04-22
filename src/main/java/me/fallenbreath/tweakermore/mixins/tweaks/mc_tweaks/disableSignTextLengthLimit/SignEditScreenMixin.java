@@ -55,7 +55,7 @@ import java.util.List;
  * The implementation for mc [1.15.2, 1.20)
  * See subproject 1.14.4 or 1.20 for implementation for other version range
  */
-@Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2"))
+@Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "(, 0.3.0-beta.2)"))
 @Mixin(
         //#if MC >= 11903
         AbstractSignEditScreen.class

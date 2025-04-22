@@ -37,7 +37,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
  * >14.11 <14.14-SNAPSHOT-336: {@code THREAD_POOL.execute()}
  * <=14.11: {@code THREAD_POOL.submit()}
  */
-@Restriction(require = @Condition(value = ModIds.custom_skin_loader, versionPredicates = ">=14.14-SNAPSHOT-336 <14.15-SNAPSHOT-350"))
+@Restriction(require = @Condition(value = ModIds.custom_skin_loader, versionPredicates = "[14.14-SNAPSHOT-336, 14.15-SNAPSHOT-350"))
 @Pseudo
 @Mixin(targets = "customskinloader.fake.FakeSkinManager")
 public abstract class FakeSkinManagerMixin_New {

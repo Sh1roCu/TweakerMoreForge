@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 
 @SuppressWarnings("UnresolvedMixinReference")
-@Restriction(require = @Condition(value = ModIds.carpet_tis_addition, versionPredicates = ">=1.41.0"))
+@Restriction(require = @Condition(value = ModIds.carpet_tis_addition, versionPredicates = "[1.41.0,)"))
 @Pseudo
 @Mixin(targets = "carpettisaddition.helpers.rule.syncServerMsptMetricsData.ServerMsptMetricsDataSyncer")
 public abstract class ServerMsptMetricsDataSyncerMixin {
