@@ -16,7 +16,8 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
- */
+ *//*
+
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tweakeroo;
 
@@ -36,12 +37,13 @@ import org.spongepowered.asm.mixin.injection.At;
 @Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(RenderUtils.class)
 public abstract class RenderUtilsMixin {
+//used in mc<1.21.1
     @ModifyExpressionValue(
             method = "renderInventoryOverlay",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/SimpleContainer;<init>(I)V",
-                    //ordinal = 1,
+                    ordinal = 1,
                     remap = true
             ),
             remap = false
@@ -73,3 +75,4 @@ public abstract class RenderUtilsMixin {
         return entity;
     }
 }
+*/

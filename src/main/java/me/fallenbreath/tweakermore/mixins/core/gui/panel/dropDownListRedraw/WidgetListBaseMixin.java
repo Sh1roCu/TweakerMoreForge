@@ -51,33 +51,33 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
     }
 
     //#if MC < 11904
-    @Inject(
-            method = "drawContents",
-            at = @At(
-                    value = "INVOKE",
-                    //#if MC >= 11600
-                    target = "Lfi/dy/masa/malilib/gui/widgets/WidgetListEntryBase;render(IIZLnet/minecraft/client/gui/GuiGraphics;)V",
-                    remap = true
-                    //#else
-                    //$$ target = "Lfi/dy/masa/malilib/gui/widgets/WidgetBase;postRenderHovered(IIZ)V",
-                    //$$ remap = false
-                    //#endif
-            ),
-            remap = false
-    )
-    private void drawTweakerMoreConfigGuiDropDownListAgainBeforeHover(
-            //#if MC >= 11600
-            GuiGraphics matrixStack,
-            //#endif
-            int mouseX, int mouseY, float partialTicks, CallbackInfo ci
-    ) {
-        this.drawTweakerMoreConfigGuiDropDownListAgain(
-                //#if MC >= 11600
-                matrixStack,
-                //#endif
-                mouseX, mouseY
-        );
-    }
+    //$$ @Inject(
+    //$$    method = "drawContents",
+    //$$    at = @At(
+    //$$            value = "INVOKE",
+    //$$            //#if MC >= 11600
+    //$$            target = "Lfi/dy/masa/malilib/gui/widgets/WidgetListEntryBase;render(IIZLnet/minecraft/client/gui/GuiGraphics;)V",
+    //$$            remap = true
+    //$$            //#else
+    //$$            //$$ target = "Lfi/dy/masa/malilib/gui/widgets/WidgetBase;postRenderHovered(IIZ)V",
+    //$$            //$$ remap = false
+    //$$            //#endif
+    //$$    ),
+    //$$    remap = false
+    //$$ )
+    //$$ private void drawTweakerMoreConfigGuiDropDownListAgainBeforeHover(
+    //$$    //#if MC >= 11600
+    //$$    GuiGraphics matrixStack,
+    //$$    //#endif
+    //$$    int mouseX, int mouseY, float partialTicks, CallbackInfo ci
+    //$$ ) {
+    //$$ this.drawTweakerMoreConfigGuiDropDownListAgain(
+    //$$        //#if MC >= 11600
+    //$$        matrixStack,
+    //$$        //#endif
+    //$$        mouseX, mouseY
+    //$$ );
+    //$$ }
     //#endif
 
     @Inject(method = "drawContents", at = @At("TAIL"), remap = false)
