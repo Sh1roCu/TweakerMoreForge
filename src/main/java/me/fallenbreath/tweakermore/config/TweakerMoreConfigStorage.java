@@ -24,7 +24,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
@@ -38,8 +37,6 @@ import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import me.fallenbreath.tweakermore.util.PlatformUtils;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -88,10 +85,10 @@ public class TweakerMoreConfigStorage implements IConfigHandler {
     public void loadFromJson(JsonObject root, boolean isSelfConfig) {
         if (isSelfConfig) {
             //#if MC >= 11800
-            //$$ this.loadedJson = root.deepCopy();
+            this.loadedJson = root.deepCopy();
             //#else
             // trick to make a deep copy of the root object, cuz JsonObject.deepCopy is not private in gson v2.8.0
-            this.loadedJson = new JsonParser().parse(root.toString()).getAsJsonObject();
+            //$$ this.loadedJson = new JsonParser().parse(root.toString()).getAsJsonObject();
             //#endif
 
             ConfigRenameMigration.patchConfig(root, Lists.newArrayList(
@@ -141,11 +138,11 @@ public class TweakerMoreConfigStorage implements IConfigHandler {
             File configFile = FileUtils.getConfigFile();
             // malilib in <mc1.17 doesn't have the "save to temp then rename" operation, so we do it ourself
             //#if MC >= 11700
-            //$$ JsonUtils.writeJsonToFile(root, configFile);
+            JsonUtils.writeJsonToFile(root, configFile);
             //#else
-            File tempFile = new File(configFile.getParent(), configFile.getName() + ".tmp");
-            JsonUtils.writeJsonToFile(root, tempFile);
-            Files.move(tempFile.toPath(), configFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            //$$ File tempFile = new File(configFile.getParent(), configFile.getName() + ".tmp");
+            //$$ JsonUtils.writeJsonToFile(root, tempFile);
+            //$$ Files.move(tempFile.toPath(), configFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             //#endif
         } catch (Exception e) {
             TweakerMoreMod.LOGGER.error("Failed to save the config file of TweakerMore", e);
