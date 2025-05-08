@@ -26,10 +26,12 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
@@ -55,18 +57,17 @@ public abstract class MinecraftClientMixin {
             method = "pickBlock",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z",
-                    ordinal = 0
+                    target = "Lnet/minecraft/client/gui/screens/Screen;hasControlDown()Z"
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void creativePickBlockWithState_storeStateInTag(CallbackInfo ci, boolean isCreative, BlockEntity blockentity, HitResult.Type hitresult$type, ItemStack itemStack, Object blockState) {
+    private void creativePickBlockWithState_storeStateInTag(CallbackInfo ci, boolean isCreative, BlockEntity blockentity, HitResult.Type hitresult$type, ItemStack itemStack, BlockPos blockPos, BlockState blockState, Block block) {
         if (isCreative && !itemStack.isEmpty()) {
             if (TweakerMoreConfigs.CREATIVE_PICK_BLOCK_WITH_STATE.isKeybindHeld()) {
                 Item item = itemStack.getItem();
                 // make sure the picked item is exactly what the selected block indicates
                 // to avoid things like storing piston head's states into piston item which is not good
-                if (item instanceof BlockItem && ((BlockItem) item).getBlock() != ((BlockState) blockState).getBlock()) {
+                if (item instanceof BlockItem && ((BlockItem) item).getBlock() != blockState.getBlock()) {
                     return;
                 }
 
@@ -78,13 +79,13 @@ public abstract class MinecraftClientMixin {
                 //$$ itemStack.set(DataComponents.BLOCK_STATE, new BlockItemStateProperties(properties));
                 //#else
                 CompoundTag nbt = new CompoundTag();
-                ((BlockState) blockState).getValues().forEach((property, value) -> {
+                blockState.getValues().forEach((property, value) -> {
                     nbt.putString(property.getName(), value.toString());
                 });
                 itemStack.getOrCreateTag().put("BlockStateTag", nbt);
                 //#endif
 
-                InfoUtils.printActionbarMessage("tweakermore.impl.creativePickBlockWithState.message", ((BlockState) blockState).getBlock().getName());
+                InfoUtils.printActionbarMessage("tweakermore.impl.creativePickBlockWithState.message", block.getName());
             }
         }
     }

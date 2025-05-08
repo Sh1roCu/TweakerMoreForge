@@ -25,7 +25,6 @@ import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.MalilibStuffsInitializer;
 import me.fallenbreath.tweakermore.util.AutoMixinAuditExecutor;
 import me.fallenbreath.tweakermore.util.bootstrap.TweakerMorePreLaunchEntrypoint;
-import net.minecraftforge.fml.ModContainer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
