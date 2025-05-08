@@ -31,11 +31,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Restriction(require = {
-        @Condition(value = ModIds.sodium, versionPredicates = "(0.3.3, 0.5.0)")
-})
+@Restriction(require = {@Condition(ModIds.sodium)})
 @Pseudo
-@Mixin(targets = "me.jellysquid.mods.sodium.client.util.frustum.JomlFrustum")
+@Mixin(targets = "me.jellysquid.mods.sodium.client.render.viewport.frustum.SimpleFrustum")
 public abstract class JomlFrustumMixin implements CouldBeAlwaysVisibleFrustum {
     @Unique
     private boolean alwaysVisible = false;
@@ -52,19 +50,14 @@ public abstract class JomlFrustumMixin implements CouldBeAlwaysVisibleFrustum {
 
     @SuppressWarnings({"rawtypes", "unchecked", "UnresolvedMixinReference"})
     @Inject(
-            method = "testBox",
+            method = "testAab",
             at = @At("HEAD"),
             remap = false,
             cancellable = true
     )
     private void disableCameraFrustumCulling_implementAlwaysVisible(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, CallbackInfoReturnable cir) {
         if (this.alwaysVisible) {
-            try {
-                Class visibilityClass = Class.forName("me.jellysquid.mods.sodium.client.util.frustum.Frustum$Visibility");
-                Object inside = Enum.valueOf(visibilityClass, "INSIDE");
-                cir.setReturnValue(inside);
-            } catch (Exception ignored) {
-            }
+            cir.setReturnValue(true);
         }
     }
 }
