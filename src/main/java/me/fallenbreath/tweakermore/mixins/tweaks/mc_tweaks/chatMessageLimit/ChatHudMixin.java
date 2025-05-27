@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.chatMessageLimit;
 
 import com.google.common.collect.Lists;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -31,7 +32,9 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
@@ -57,7 +60,7 @@ public abstract class ChatHudMixin {
     @Final
     private List<GuiMessage.Line> trimmedMessages;
 
-    @ModifyConstant(
+    @ModifyExpressionValue(
             //#if MC >= 12006
             method = {
                     "addMessageToDisplayQueue",
@@ -68,12 +71,15 @@ public abstract class ChatHudMixin {
             //#else
             //$$ method = "addMessage(Lnet/minecraft/text/Text;IIZ)V",
             //#endif
-            constant = @Constant(intValue = 100),
+            at = @At(
+                    value = "CONSTANT",
+                    args = "intValue=100"
+            ),
             // there are so many mod that modifies the chat limit
             // in case it's not in the conflict list, here comes a fail-soft solution
             require = 0
     )
-    private int raiseChatLimitTo(int value) {
+    private int chatMessageLimit_modifyLimit(int value) {
         return TweakerMoreConfigs.CHAT_MESSAGE_LIMIT.isModified() ? TweakerMoreConfigs.CHAT_MESSAGE_LIMIT.getIntegerValue() : value;
     }
 
@@ -90,7 +96,7 @@ public abstract class ChatHudMixin {
                     //#endif
             )
     )
-    private void makeSureTheScrollBarIsVisible(Args args) {
+    private void chatMessageLimit_makeSureTheScrollBarIsVisible(Args args) {
         //#if 11600 <= MC && MC < 12000
         //$$ int y1Idx = 2;
         //$$ int y2Idx = 4;
@@ -113,8 +119,9 @@ public abstract class ChatHudMixin {
         }
     }
 
+    // XXX: switch for this?
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void replaceMessageContainerWithLinkedList(CallbackInfo ci) {
+    private void chatMessageLimit_replaceMessageContainerWithLinkedList(CallbackInfo ci) {
         this.allMessages = Lists.newLinkedList(this.allMessages);
         this.trimmedMessages = Lists.newLinkedList(this.trimmedMessages);
     }
