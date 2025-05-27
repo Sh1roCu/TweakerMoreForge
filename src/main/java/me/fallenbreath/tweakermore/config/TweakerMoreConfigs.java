@@ -46,6 +46,7 @@ import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.lmAutoRefreshMaterialList.LitematicaAutoRefreshMaterialListHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.particleLimit.ParticleLimitHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.windowSize.WindowSizeHelper;
@@ -132,6 +133,27 @@ public class TweakerMoreConfigs {
     )
     public static final TweakerMoreConfigBoolean AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI = newConfigBoolean("autoCollectMaterialListItemCloseGui", true);
 
+    @Config(
+            type = Config.Type.GENERIC,
+            restriction = @Restriction(require = {
+                    @Condition(ModIds.litematica),
+                    @Condition(ModIds.itemscroller)
+            }),
+            category = Config.Category.FEATURES
+    )
+    public static final TweakerMoreConfigBooleanHotkeyed AUTO_COLLECT_MATERIAL_LIST_ITEM_RETAIN_ITEM = newConfigBooleanHotkeyed("autoCollectMaterialListItemRetainItem", false);
+
+    @Config(
+            type = Config.Type.GENERIC,
+            restriction = @Restriction(require = {
+                    @Condition(ModIds.litematica),
+                    @Condition(ModIds.itemscroller)
+            }),
+            category = Config.Category.FEATURES
+    )
+
+    public static final TweakerMoreConfigInteger AUTO_COLLECT_MATERIAL_LIST_ITEM_KEEP_RETAIN_AMOUNT = newConfigInteger("autoCollectMaterialListItemRetainItemAmount", 1, 1, 63);
+
     @Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
     public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("autoFillContainer");
 
@@ -194,6 +216,9 @@ public class TweakerMoreConfigs {
     @Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_ANGLE = newConfigDouble("infoViewBeamAngle", 40, 1, 120);
 
+    @Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(ModIds.tweakeroo)), category = Config.Category.FEATURES)
+    public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_FOLLOW_FREECAM = newConfigBooleanHotkeyed("infoViewFollowFreecam", false);
+
     @Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigDouble INFO_VIEW_TARGET_DISTANCE = newConfigDouble("infoViewTargetDistance", 8, 4, 32);
 
@@ -220,6 +245,9 @@ public class TweakerMoreConfigs {
 
     @Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigOptionList INFO_VIEW_COMPARATOR_TARGET_STRATEGY = newConfigOptionList("infoViewComparatorTargetStrategy", InfoViewTargetStrategy.BEAM);
+
+    @Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+    public static final TweakerMoreConfigDouble INFO_VIEW_COMPARATOR_TEXT_SCALE = newConfigDouble("infoViewComparatorTextScale", 1, 0.1, 3);
 
     @Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_COMMAND_BLOCK = newConfigBooleanHotkeyed("infoViewCommandBlock");
@@ -257,6 +285,9 @@ public class TweakerMoreConfigs {
     @Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigOptionList INFO_VIEW_HOPPER_TARGET_STRATEGY = newConfigOptionList("infoViewHopperTargetStrategy", InfoViewTargetStrategy.BEAM);
 
+    @Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+    public static final TweakerMoreConfigDouble INFO_VIEW_HOPPER_TEXT_SCALE = newConfigDouble("infoViewHopperTextScale", 1, 0.1, 3);
+
     @Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("infoViewRedstoneDustUpdateOrder");
 
@@ -265,6 +296,9 @@ public class TweakerMoreConfigs {
 
     @Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigDouble INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("infoViewRedstoneDustUpdateOrderTextAlpha", 0.8, 0, 1);
+
+    @Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+    public static final TweakerMoreConfigDouble INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_SCALE = newConfigDouble("infoViewRedstoneDustUpdateOrderTextScale", 1, 0.1, 3);
 
     @Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
     public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_RESPAWN_BLOCK_EXPLOSION = newConfigBooleanHotkeyed("infoViewRespawnBlockExplosion");
@@ -415,6 +449,9 @@ public class TweakerMoreConfigs {
     @Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigBooleanHotkeyed CLIENT_ENTITY_TARGETING_SUPPORT_ALL = newConfigBooleanHotkeyed("clientEntityTargetingSelectAll");
 
+    @Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.2")), category = Config.Category.MC_TWEAKS)
+    public static final TweakerMoreConfigInteger COMMAND_HISTORY_LIMIT = newConfigInteger("commandHistoryLimit", 50, 50, 10000);
+
     @Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
 
@@ -435,6 +472,9 @@ public class TweakerMoreConfigs {
 
     @Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigBooleanHotkeyed DISABLE_CREATIVE_FLY_CLIMBING_CHECK = newConfigBooleanHotkeyed("disableCreativeFlyClimbingCheck");
+
+    @Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+    public static final TweakerMoreConfigBooleanHotkeyed DISABLE_CREATIVE_FLY_LANDING_EXIT_FLYING = newConfigBooleanHotkeyed("disableCreativeFlyLandingExitFlying");
 
     @Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigBooleanHotkeyed DISABLE_DARK_SKY_RENDERING = newConfigBooleanHotkeyed("disableDarkSkyRendering");
@@ -464,6 +504,9 @@ public class TweakerMoreConfigs {
     public static final TweakerMoreConfigBooleanHotkeyed DISABLE_HORIZON_SHADING_RENDERING = newConfigBooleanHotkeyed("disableHorizonShadingRendering");
 
     @Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+    public static final TweakerMoreConfigBooleanHotkeyed DISABLE_INVENTORY_SCREEN_PLAYER_MODEL_RENDERING = newConfigBooleanHotkeyed("disableInventoryScreenPlayerModelRendering");
+
+    @Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
 
     @Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "[1.17,)")), category = Config.Category.MC_TWEAKS)
@@ -471,6 +514,9 @@ public class TweakerMoreConfigs {
 
     @Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigBooleanHotkeyed DISABLE_REDSTONE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneParticle");
+
+    @Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+    public static final TweakerMoreConfigBooleanHotkeyed DISABLE_RESOURCE_PACK_LIST_RESET_ON_FAILURE = newConfigBooleanHotkeyed("disableResourcePackListResetOnFailure");
 
     @Config(type = Config.Type.DISABLE, restriction = @Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "(, 0.3.0-beta.2)")), category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
@@ -533,6 +579,9 @@ public class TweakerMoreConfigs {
     public static final TweakerMoreConfigInteger MAX_CHAT_HUD_HEIGHT = newConfigInteger("maxChatHudHeight", 160, 160, 1000);
 
     @Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+    public static final TweakerMoreConfigBoolean MOVE_CONNECTED_SERVER_ENTRY_TO_TOP = newConfigBoolean("moveConnectedServerEntryToTop", false);
+
+    @Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigBoolean MOVING_PISTON_BLOCK_SELECTABLE = newConfigBoolean("movingPistonBlockSelectable", false);
 
     @Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
@@ -567,6 +616,9 @@ public class TweakerMoreConfigs {
 
     @Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
+
+    @Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+    public static final TweakerMoreConfigBoolean REMEMBER_SERVER_LIST_SCROLL_POSITION_ON_REFRESH = newConfigBoolean("rememberServerListScrollPositionOnRefresh", false);
 
     @Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
     public static final TweakerMoreConfigDouble SCOREBOARD_SIDE_BAR_SCALE = newConfigDouble("scoreboardSideBarScale", 1, 0.001, 2);
@@ -670,6 +722,28 @@ public class TweakerMoreConfigs {
     public static final TweakerMoreConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtils.getItemId(Items.LAVA_BUCKET)));
 
     public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
+
+    @Config(
+            type = Config.Type.GENERIC,
+            restriction = @Restriction(require = @Condition(ModIds.litematica)),
+            category = Config.Category.MOD_TWEAKS
+    )
+    public static final TweakerMoreConfigBoolean LM_KEEP_MATERIAL_LIST_CROSS_DIMENSION = newConfigBoolean("lmKeepMaterialListCrossDimension", false);
+
+    @Config(
+            type = Config.Type.GENERIC,
+            restriction = @Restriction(require = @Condition(ModIds.litematica)),
+            category = Config.Category.MOD_TWEAKS
+    )
+    public static final TweakerMoreConfigBoolean LM_AUTO_REFRESH_MATERIAL_LIST = newConfigBoolean("lmAutoRefreshMaterialList", false);
+
+    @Config(
+            type = Config.Type.GENERIC,
+            restriction = @Restriction(require = @Condition(ModIds.litematica)),
+            category = Config.Category.MOD_TWEAKS
+    )
+
+    public static final TweakerMoreConfigBoolean LM_MATERIAL_LIST_IGNORE_STATE_MISMATCHES = newConfigBoolean("lmMaterialListIgnoreStateMismatches", false);
 
     @Config(
             type = Config.Type.GENERIC,
@@ -947,6 +1021,7 @@ public class TweakerMoreConfigs {
 
         //////////// Event Listeners ////////////
 
+        TickHandler.getInstance().registerClientTickHandler(LitematicaAutoRefreshMaterialListHelper.getInstance());
         TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
         TickHandler.getInstance().registerClientTickHandler(PistorderRenderer.getInstance());
         TweakerMoreRenderEventHandler.register(new AutoContainerProcessorHintRenderer());

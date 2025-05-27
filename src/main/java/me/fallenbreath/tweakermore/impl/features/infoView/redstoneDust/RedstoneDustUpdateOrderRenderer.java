@@ -73,6 +73,7 @@ public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer {
     private void renderTextAtPos(RenderContext context, BlockPos pos, String text, int color) {
         TextRenderer.create().
                 text(text).atCenter(pos).
+                fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_SCALE.getDoubleValue()).
                 color(color).
                 shadow().seeThrough().
                 render();
