@@ -87,11 +87,21 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor {
                 for (Slot slot : containerInvSlots) {
                     if (InventoryUtils.areStacksEqual(stack, slot.getItem())) {
                         int stackAmount = slot.getItem().getCount();
-                        this.moveToPlayerInventory(containerScreen, playerInvSlots, slot, Math.min(missing, stackAmount));
+                        int tryMoveAmount = Math.min(missing, stackAmount);
+                        if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_RETAIN_ITEM.getBooleanValue()) {
+                            int retainAmount = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_KEEP_RETAIN_AMOUNT.getIntegerValue();
+                            tryMoveAmount = Math.min(tryMoveAmount, stackAmount - retainAmount);
+                            if (tryMoveAmount <= 0) {
+                                continue;
+                            }
+                        }
+
+                        String itemName = stack.getItem().getName().getString();
+                        this.moveToPlayerInventory(containerScreen, playerInvSlots, slot, tryMoveAmount);
                         int moved = stackAmount - slot.getItem().getCount();
                         missing -= moved;
                         totalTaken += moved;
-                        TweakerMoreMod.LOGGER.debug("Moved {}x {} to player inventory, still miss {} items", moved, stack.getItem().getName().getString(), missing);
+                        TweakerMoreMod.LOGGER.debug("Moved {}x (attempt {}x) {} to player inventory, still miss {} items", moved, tryMoveAmount, itemName, missing);
                         if (moved == 0) {
                             TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", stack.getItem().getName().getString());
                             break;
@@ -150,7 +160,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor {
             TweakerMoreMod.LOGGER.warn("Too many items to move to player inventory, the stack {} has {} items but {} items are required", stack.getItem(), stack.getCount(), amount);
             return;
         }
-        // ensure amount <= stack.getCount()
+        // ensured amount <= stack.getCount()
 
         InventoryUtils.leftClickSlot(containerScreen, fromSlot.index);
         // reversed iterating to match vanilla shift-click item putting order
