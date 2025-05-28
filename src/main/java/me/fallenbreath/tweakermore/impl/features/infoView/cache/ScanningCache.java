@@ -24,7 +24,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import me.fallenbreath.tweakermore.util.PositionUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ClipContext;
@@ -47,15 +46,12 @@ public class ScanningCache {
 
     @Nullable
     public HitResult crossHairTarget(double reach) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null) {
+        LocalPlayer camera = InfoViewCameraUtils.getCameraEntity();
+        if (camera == null) {
             return null;
         }
-        return this.rayTraceCache.computeIfAbsent(reach, k -> {
-            LocalPlayer player = mc.player;
-            return player.clientLevel.clip(
-                    new ClipContext(player.getEyePosition(), player.getLookAngle().normalize().scale(reach).add(player.getEyePosition()), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-        });
+        return this.rayTraceCache.computeIfAbsent(reach, k -> camera.clientLevel.clip(
+                new ClipContext(camera.getEyePosition(), camera.getLookAngle().normalize().scale(reach).add(camera.getEyePosition()), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, camera)));
     }
 
     @Nullable

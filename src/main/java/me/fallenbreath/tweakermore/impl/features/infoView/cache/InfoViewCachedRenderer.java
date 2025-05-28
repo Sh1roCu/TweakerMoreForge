@@ -32,6 +32,7 @@ import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -52,12 +53,13 @@ public class InfoViewCachedRenderer {
         Minecraft mc = Minecraft.getInstance();
         Level world = WorldUtils.getBestWorld(mc);
         Level clientWorld = mc.level;
-        if (world == null || clientWorld == null || mc.player == null) {
+        LocalPlayer cameraPlayer = InfoViewCameraUtils.getCameraEntity();
+        if (world == null || clientWorld == null || cameraPlayer == null) {
             return;
         }
 
-        Vec3 camPos = mc.player.getEyePosition(RenderUtils.tickDelta);
-        Vec3 camVec = mc.player.getLookAngle();
+        Vec3 camPos = cameraPlayer.getEyePosition(RenderUtils.tickDelta);
+        Vec3 camVec = cameraPlayer.getLookAngle();
 
         long now = System.nanoTime();
         long ups = TweakerMoreConfigs.INFO_VIEW_SCANNING_PER_SECOND.getIntegerValue();

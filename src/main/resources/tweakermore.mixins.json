@@ -78,6 +78,7 @@
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.KeyboardMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClient_extendedTargetMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClient_pickEntityMixin",
+    "tweaks.mc_tweaks.commandHistoryLimit.CommandHistoryManagerMixin",
     "tweaks.mc_tweaks.connectionSimulatedDelay.ClientConnection_ChannelInitializerMixin",
     "tweaks.mc_tweaks.daytimeOverride.ClientWorldMixin",
     "tweaks.mc_tweaks.daytimeOverride.WorldMixin",
@@ -132,10 +133,12 @@
     "tweaks.mc_tweaks.flyDrag.LivingEntityMixin",
     "tweaks.mc_tweaks.fovOverride.GameRendererMixin",
     "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenMixin",
+    "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.compat.malilib.RenderEventHandlerMixin",
     "tweaks.mc_tweaks.keepMessageHistoryOnReconfiguration.InGameHudMixin",
     "tweaks.mc_tweaks.keepMessageHistoryOnReconfiguration.MinecraftClientMixin",
     "tweaks.mc_tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.mc_tweaks.maxChatHudHeight.ChatHudMixin",
+    "tweaks.mc_tweaks.moveConnectedServerEntryToTop.MultiplayerScreenMixin",
     "tweaks.mc_tweaks.movingPistonBlockSelectable.GameRendererMixin",
     "tweaks.mc_tweaks.movingPistonBlockSelectable.PistonExtensionBlockMixin",
     "tweaks.mc_tweaks.movingPistonBlockSelectable.WorldRendererMixin",
@@ -156,6 +159,8 @@
     "tweaks.mc_tweaks.preciseItemEntityModel.ItemRendererMixin",
     "tweaks.mc_tweaks.preciseItemEntityModel.ModelTransformationMixin",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
+    "tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh.MultiplayerScreenAccessor",
+    "tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh.MultiplayerScreenMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererMixin",
@@ -183,6 +188,9 @@
     "tweaks.mod_tweaks.eprHideOnDebugHud.PlayerHUDRenderer_v2Mixin",
     "tweaks.mod_tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.mod_tweaks.handRestoreRestriction.PlacementTweaksMixin",
+    "tweaks.mod_tweaks.lmAutoRefreshMaterialList.SchematicWorldRefresherMixin",
+    "tweaks.mod_tweaks.lmKeepMaterialListCrossDimension.DataManagerMixin",
+    "tweaks.mod_tweaks.lmMaterialListIgnoreStateMismatches.TaskCountBlocksPlacementMixin",
     "tweaks.mod_tweaks.lmOriginOverride000.GuiSchematicLoadButtonListenerMixin",
     "tweaks.mod_tweaks.lmOriginOverride000.LitematicaSchematicMixin",
     "tweaks.mod_tweaks.lmOriginOverride000.SchematicPlacementMixin",
@@ -231,5 +239,14 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "tweaks.mc_tweaks.disableCreativeFlyLandingExitFlying.ClientPlayerEntityMixin",
+    "tweaks.mc_tweaks.disableInventoryScreenPlayerModelRendering.InventoryScreenMixin",
+    "tweaks.mc_tweaks.disableResourcePackListResetOnFailure.MinecraftClientMixin",
+    "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.compat.malilib.InventoryScreenMixins$End",
+    "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.compat.malilib.InventoryScreenMixins$Start",
+    "tweaks.mc_tweaks.moveConnectedServerEntryToTop.ClientPlayNetworkHandlerMixin",
+    "tweaks.mc_tweaks.moveConnectedServerEntryToTop.ServerListAccessor"
+  ]
 }
