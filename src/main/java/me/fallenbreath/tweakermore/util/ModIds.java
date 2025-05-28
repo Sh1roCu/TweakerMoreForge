@@ -46,6 +46,7 @@ public class ModIds
 	public static final String parachute = "parachute";
 	public static final String raise_chat_limit = "raise-chat-limit";
 	public static final String wheres_my_chat_history = "wmch";
+	public static final String nolijium = "nolijium";
 
 	// Other
 	public static final String carpet_tis_addition = "carpet-tis-addition";

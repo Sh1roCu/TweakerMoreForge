@@ -46,7 +46,8 @@ import java.util.List;
         @Condition(ModIds.more_chat_history),
         @Condition(ModIds.parachute),
         @Condition(ModIds.raise_chat_limit),
-        @Condition(ModIds.wheres_my_chat_history)
+        @Condition(ModIds.wheres_my_chat_history),
+        @Condition(ModIds.nolijium)
 })
 @Mixin(ChatComponent.class)
 public abstract class ChatHudMixin {
