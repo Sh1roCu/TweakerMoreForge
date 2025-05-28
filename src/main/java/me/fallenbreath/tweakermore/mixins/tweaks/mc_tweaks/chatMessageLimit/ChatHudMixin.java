@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.chatMessageLimit;
 
 import com.google.common.collect.Lists;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -58,7 +59,7 @@ public abstract class ChatHudMixin {
     @Final
     private List<GuiMessage.Line> trimmedMessages;
 
-    @ModifyConstant(
+    @ModifyExpressionValue(
             //#if MC >= 12006
             //$$ method = {
             //$$    "addMessageToDisplayQueue",
@@ -69,7 +70,10 @@ public abstract class ChatHudMixin {
             //#else
             //$$ method = "addMessage(Lnet/minecraft/text/Text;IIZ)V",
             //#endif
-            constant = @Constant(intValue = 100),
+            at = @At(
+                    value = "CONSTANT",
+                    args = "intValue=100"
+            ),
             // there are so many mod that modifies the chat limit
             // in case it's not in the conflict list, here comes a fail-soft solution
             require = 0
