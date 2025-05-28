@@ -143,7 +143,7 @@ public abstract class ClientPlayerInteractionManagerMixin {
                     //#if MC >= 12103
                     //$$ target = "Lnet/minecraft/world/item/ItemStack;use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
                     //#else
-                    target = "Lnet/neoforged/neoforge/common/CommonHooks;onItemRightClick(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
+                    target = "Lnet/minecraft/world/InteractionResultHolder;getResult()Lnet/minecraft/world/InteractionResult;"
                     //#endif
             )
     )
