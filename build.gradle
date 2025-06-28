@@ -1,8 +1,12 @@
+import com.hypherionmc.modpublisher.properties.CurseEnvironment
+import com.hypherionmc.modpublisher.properties.ModLoader
+
 plugins {
     id 'java-library'
     id 'maven-publish'
     id 'idea'
     id 'net.neoforged.moddev' version '2.0.80'
+    id "com.hypherionmc.modutils.modpublisher" version "2.+"
 }
 
 version = mod_version
@@ -112,6 +116,26 @@ dependencies {
     implementation("maven.modrinth:bocchud:${bocchud_version}")
     implementation("maven.modrinth:mafglib:${mafglib_version}")
     implementation("maven.modrinth:nolijium:${nolijium_version}")
+}
+
+publisher {
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
+    }
+
+    setCurseID("${project.curseforge_id}")
+    setModrinthID("${project.modrinth_id}")
+    setVersionType("beta")
+    setVersion("${project.version}")
+    setDisplayName("${project.mod_name} ${project.version}")
+    setGameVersions("1.21", "1.21.1")
+    setLoaders(ModLoader.NEOFORGE)
+    setCurseEnvironment(CurseEnvironment.CLIENT)
+    setArtifact(jar)
+    curseDepends { required("mafglib") }
+    modrinthDepends { required("mafglib") }
+    setChangelog("")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
