@@ -23,6 +23,8 @@ package me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard;
 import com.google.common.base.Joiner;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.util.EntityUtils;
+import me.fallenbreath.tweakermore.util.ModIds;
+import me.fallenbreath.tweakermore.util.PlatformUtils;
 import me.fallenbreath.tweakermore.util.compat.litematica.LitematicaUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -52,7 +54,7 @@ public class SignTextCopier {
             BlockPos blockPos = null;
             SignBlockEntity blockEntity = null;
             String copiedTextKey = null;
-            if (LitematicaUtils.isRenderingEnabled()) {
+            if (PlatformUtils.isModLoaded(ModIds.litematica) && LitematicaUtils.isRenderingEnabled()) {
                 blockPos = LitematicaUtils.getSchematicWorldCrosshairTargetPos(player);
                 blockEntity = tryGetSignBlockEntity(LitematicaUtils.getSchematicWorld(), blockPos);
                 copiedTextKey = "sign_copied_schematic";
