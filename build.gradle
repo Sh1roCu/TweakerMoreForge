@@ -136,7 +136,7 @@ publisher {
     setArtifact(jar)
     curseDepends { required("mafglib") }
     modrinthDepends { required("mafglib") }
-    setChangelog("")
+    setChangelog("Fixed crashed when try 'copySignTextToClipBoard' without Forgematica")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
