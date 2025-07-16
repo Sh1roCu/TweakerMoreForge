@@ -56,7 +56,7 @@ public abstract class BoatEntityMixin extends Entity {
     //$$ private int lerpSteps;
     //#else
     @Shadow
-    private int lerpSteps;
+    private int f_38267_;
     //#endif
 
     @Inject(method = "lerpTo", at = @At("TAIL"))
@@ -71,7 +71,7 @@ public abstract class BoatEntityMixin extends Entity {
             //#if MC >= 12004
             //$$ this.lerpSteps = 1;
             //#else
-            this.lerpSteps = 1;
+            this.f_38267_ = 1;
             //#endif
 
             if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly()) {
