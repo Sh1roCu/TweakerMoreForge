@@ -197,7 +197,7 @@ publisher {
     setGameVersions("1.20", "1.20.1")
     setLoaders(ModLoader.FORGE)
     setCurseEnvironment(CurseEnvironment.CLIENT)
-    setArtifact(project.tasks.getByName("jarJar"))
+    setArtifact("build/libs/${mod_id}-${mod_version}-all.jar")
     curseDepends { required("mafglib") }
     modrinthDepends { required("mafglib") }
     setChangelog("")
